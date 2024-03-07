@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use AppModelstequila;
+use App\Models\tequila;
 
 class tequiController extends Controller
 {
@@ -26,7 +26,7 @@ class tequiController extends Controller
         $request->validate([
             'Marca' => 'required|max:255',
             'Tipo' => 'required| max:255',
-            'Precio' => 'required'
+            'Precio' => 'required',
           ]);
 
           tequila::create($request->all());
@@ -53,7 +53,7 @@ class tequiController extends Controller
         $request->validate([
             'Marca' => 'required|max:255',
             'Tipo' => 'required| max:255',
-            'Precio' => 'required'
+            'Precio' => 'required',
         ]);
 
         $tequila = tequila::find($id);
@@ -66,7 +66,7 @@ class tequiController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('tequila.create');
     }
 
 

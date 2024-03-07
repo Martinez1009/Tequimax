@@ -14,6 +14,6 @@ use App\Http\Controllers\tequiController;
 |
 */
 
-Route::get('/', tequiController::class);
+
 
 Route::resource('tequila', tequiController::class);
