@@ -5,43 +5,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Tequilas</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@1.0.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="index.css">
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <style>
+        /* Estilos personalizados */
+        .navbar {
+            background-color: #333; /* Cambia el color de fondo del navbar */
+            color: white; /* Cambia el color del texto en los elementos del navbar */
+        }
 
-    <title>Editar tequila</title>
+        body {
+            background-color: #f0f0f0; /* Cambia el color de fondo del cuerpo de la página */
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-        <div class="container-fluid">
-            <a class="navbar-brand h1" href={{ route('tequila.index') }}>Tequilas</a>
-            <div class="justify-end ">
-                <div class="col ">
-                    <a class="btn btn-sm btn-success" href={{ route('tequila.create') }}>Agregar tequila</a>
+    <!-- START NAV -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href={{ route('tequila.index') }}>
+                    <img src="https://images.vexels.com/media/users/3/181269/isolated/preview/8d7a82f30e8bc23a9e89c2830be8fac4-ilustracion-de-tequila-de-bebida-alcoholica.png"
+                        alt="Logo">
+                </a>
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item is-active" href={{ route('tequila.create') }}>
+                        Agregar Tequila
+                    </a>
                 </div>
             </div>
+        </div>
     </nav>
+    <!-- END NAV -->
     <div class="container h-100 mt-5">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-10 col-md-8 col-lg-6">
-                <h3>Actualizar tequila</h3>
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <h3 class="title is-3">Actualizar tequila</h3>
                 <form action="{{ route('tequila.update', $tequila->id) }}" method="post">
                     @csrf
                     @method('PUT')
-                    <div class="form-group">
-                        <label for="Marca">Marca</label>
-                        <input type="text" class="form-control" id="MArca" name="Marca"
-                            value="{{ $tequila->title }}" required>
+                    <div class="field">
+                        <label class="label">Marca</label>
+                        <div class="control">
+                            <input class="input" type="text" name="Marca" value="{{ $tequila->Marca }}" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Tipo">Tipo</label>
-                        <input type="text" class="form-control" id="Tipo" name="Tipo" required>
+                    <div class="field">
+                        <label class="label">Tipo</label>
+                        <div class="control">
+                            <input class="input" type="text" name="Tipo" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Precio">Precio</label>
-                        <input type="number" class="form-control" id="Precio" name="Precio" required>                    
+                    <div class="field">
+                        <label class="label">Precio</label>
+                        <div class="control">
+                            <input class="input" type="number" name="Precio" required>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Actualizar tequila</button>
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button class="button is-primary" type="submit">Actualizar tequila</button>
+                        </div>
+                        <div class="control">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="button is-danger">Cerrar sesión</button>
+                            </form>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

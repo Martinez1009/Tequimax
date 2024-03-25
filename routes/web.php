@@ -13,7 +13,17 @@ use App\Http\Controllers\tequiController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::resource('tequila', tequiController::class);
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/tequila/index', function () {
+        return view('/tequila/index');
+    })->name('Inicio');
+});
