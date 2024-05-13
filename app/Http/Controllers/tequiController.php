@@ -1,9 +1,13 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
 
 use Illuminate\Http\Request;
 use App\Models\tequila;
+use App\Policies\TequilaPolicy;
+
 
 class tequiController extends Controller
 {
@@ -14,10 +18,12 @@ class tequiController extends Controller
     {
         $tequila = tequila::all();
 
+
         return view('tequila.index', compact('tequila'));
     }
 
-    
+
+   
     /**
      * Store a newly created resource in storage.
      */
@@ -35,6 +41,7 @@ class tequiController extends Controller
             ->with('Hecho','tequila creado correctamente.');
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -42,8 +49,10 @@ class tequiController extends Controller
     {
         $tequila = tequila::find($id);
 
+
         return view('tequila.show', compact('tequila'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -56,12 +65,17 @@ class tequiController extends Controller
             'Precio' => 'required',
         ]);
 
+
         $tequila = tequila::find($id);
+        $this->authorize('update', $tequila);
         $tequila->update($request->all());
+
 
         return redirect()->route('tequila.index')
             ->with('Hecho', 'Tequla actualizado correctamente.');
     }
+
+
 
 
     public function create()
@@ -70,21 +84,29 @@ class tequiController extends Controller
     }
 
 
+
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
+
         $tequila = tequila::find($id);
+        $this->authorize('delete', $tequila);
         $tequila->delete();
+
 
         return redirect()->route('tequila.index')
             ->with('Hecho', 'Tequila eliminado correctamente.');
     }
 
+
     public function edit($id)
     {
         $tequila = tequila::find($id);
+        $this->authorize('update', $tequila);
+
 
         return view('tequila.edit', compact('tequila'));
     }
